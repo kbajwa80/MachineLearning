@@ -13,6 +13,11 @@ sales_df = pd.read_csv('retail_sales.csv',parse_dates=['ds'])
 #Plotly account credentials
 plotly.tools.set_credentials_file(username='bajwa.kanwar',api_key='VEYcqOPQsxNyBR1OTSfd')
 
+#model = Prophet(daily_seasonality=False,weekly_seasonality=False,yearly_seasonality=False,changepoint_prior_scale=0.05)
+#model.add_seasonality(name='weekly',period=7,fourier_order=4)
+#model.add_seasonality(name='yearly',period=365.25,fourier_order=2)
+
+
 model = Prophet(daily_seasonality=True,changepoint_prior_scale=0.05) #instantiate Prophet
 model.add_seasonality(name='monthly', period=30.5, fourier_order=5)
 model.fit(sales_df); #fit the model with your dataframe
