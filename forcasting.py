@@ -8,7 +8,7 @@ import plotly
 import plotly.graph_objs as go
 
 
-sales_df = pd.read_csv('retail_sales.csv',parse_dates=['ds'])
+sales_df = pd.read_csv('sample.csv',parse_dates=['ds'])
 
 #Plotly account credentials
 plotly.tools.set_credentials_file(username='bajwa.kanwar',api_key='VEYcqOPQsxNyBR1OTSfd')
@@ -24,12 +24,8 @@ model.fit(sales_df); #fit the model with your dataframe
 future = model.make_future_dataframe(periods=365, freq = 'd')
 forecast = model.predict(future)
 
-merge = pd.merge(forecast,sales_df, on='ds',how='left')
-
-print merge
-
-
 filename="test.csv"
+merge = pd.merge(forecast,sales_df, on='ds',how='left')
 merge.to_csv(filename, sep=',')
 
 trace1 = go.Scatter(x=sales_df['ds'], y=sales_df['y'], name='y')
